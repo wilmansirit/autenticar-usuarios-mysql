@@ -1,0 +1,37 @@
+doctype html
+html
+	head
+		title=API_Aseguramiento
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel="stylesheet", href="/bootstrap-4.3.1-dist/css/bootstrap.min.css")
+
+		script(src="/jquery/jquery-3.3.1.min.js")
+		script(src="/bootstrap-4.3.1-dist/js/bootstrap.min.js")
+	body
+
+		.container.col-md-6
+			.panel.panel-default
+
+				if (message.length > 0)
+					.alert.alert-danger(role='alert')= message
+
+				.panel-heading.text-center Registro de Usuario
+				.panel-body
+					form(action="/auth/signUp", method="post")
+						.form-group
+							label(for="firstname") Nombres:
+							input.form-control(type="text", name="firstname" required placeholder="Pedro José")
+						.form-group
+							label(for="lastname") Apellidos:
+							input.form-control(type="text", name="lastname" required placeholder="Pérez González")
+						.form-group
+							label(for="email") Correo Electrónico: 
+							input.form-control(type="email", name="email" required placeholder="joe.doe@acme.com")
+						.form-group
+							label(for="personalId") Cédula:
+							input.form-control(type="text", name="personalId" pattern="[0-9]{7,8}" required placeholder="23.456.789")
+						.form-group
+							label(for="password") Contraseña:
+							input.form-control(type="password", name="password" required placeholder="password")
+						
+						button.btn.btn-outline-primary.btn-block(type="submit") SignUp

@@ -1,0 +1,31 @@
+doctype html
+html
+	head
+		title=API_Aseguramiento
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel="stylesheet", href="/bootstrap-4.3.1-dist/css/bootstrap.min.css")
+
+		script(src="/jquery/jquery-3.3.1.min.js")
+		script(src="/bootstrap-4.3.1-dist/js/bootstrap.min.js")
+	body
+
+		.container.col-md-6
+			.panel.panel-default
+
+				if (message.length > 0)
+					.alert.alert-danger(role='alert')= message
+
+				.panel-heading.text-center Ingreso a la Aplicación
+				.panel-body
+					form(action="/auth/signIn", method="post")
+						.form-group
+							label(for="email") Correo Electrónico: 
+							input.form-control(type="email", name="email" required placeholder="joe.doe@acme.com")
+						.form-group
+							label(for="password") Contraseña:
+							input.form-control(type="password", name="password" required placeholder="password")
+						
+						button.btn.btn-outline-primary.btn-block(type="submit") Sign In
+
+
+

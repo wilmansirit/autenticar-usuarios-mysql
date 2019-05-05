@@ -5,7 +5,11 @@ const createError   = require('http-errors')
   ,   logger        = require('morgan')
   ,   session       = require('express-session')
   ,   MySQLStore    = require('express-mysql-session')(session)
-  ,   routes        = require('./routes/index');
+  ,   homeRoutes    = require('./routes/home')
+  ,   authRoutes    = require('./routes/auth')
+  ,   flash         = require('connect-flash')
+  ,   passport      = require('passport')
+
   
 require('dotenv').config();
 const app = express();
@@ -22,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret            : process.env.SESSION_WORD,
+  secret            : process.env.SESSION_HASH,
   resave            : true,
   saveUninitialized : true,
   store             : new MySQLStore({
@@ -31,11 +35,26 @@ app.use(session({
     user            : process.env.LOCAL_USERNAME,
     password        : process.env.LOCAL_PASSWORD,
     database        : process.env.LOCAL_DATABASE
-  })
+  }),
+  maxAge            : Date.now() + (8 * 3600 * 1000)
 }))
 
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Flash Messages
+app.use(flash());
+
+
 // Routes
-app.use('/', routes);
+app.use('/', homeRoutes);
+// app.use('/auth', authRoutes)(app, passport);
+app.use('/auth', authRoutes);
+
+// Load Passport Strategies
+// require('./passport/passport')(passport, models.User);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
