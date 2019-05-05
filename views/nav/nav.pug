@@ -1,5 +1,5 @@
 
-nav.navbar.navbar-expand-lg.navbar-light.bg-light
+nav.navbar.navbar-expand-md.navbar-light(style="background-color: #e3f2fd;")
 	a.navbar-brand(href='/') Navbar
 	button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
 		span.navbar-toggler-icon
@@ -12,9 +12,10 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
 				a.nav-link(href='/') Home
 			li.nav-item
 				a.nav-link(href='/auth/dashboard') Dashboard
-			li.nav-item
-				a.nav-link(href='/auth/signUp') Registrarse
-			li.nav-item
-				a.nav-link(href='/auth/signIn') Ingresar
+			if !isAuthenticated
+				li.nav-item
+					a.nav-link(href='/auth/signUp') Registrarse
+				li.nav-item
+					a.nav-link(href='/auth/signIn') Ingresar
 			li.nav-item
 				a.nav-link(href='/auth/logout') Salir

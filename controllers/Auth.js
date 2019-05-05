@@ -25,8 +25,11 @@ module.exports = {
 					},
 
 	dashboard	:	(req, res, next) => {
-
-						res.render('dashboard', {user: req.user});
+		
+						res.render('dashboard', {
+							user: req.user,
+							isAuthenticated: req.isAuthenticated()
+						});
 
 					}
 

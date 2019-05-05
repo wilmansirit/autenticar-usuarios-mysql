@@ -9,6 +9,8 @@ const createError   = require('http-errors')
   ,   authRoutes    = require('./routes/auth')
   ,   flash         = require('connect-flash')
   ,   passport      = require('passport')
+  ,   helmet        = require('helmet')
+  ,   models        = require('./models')
 
   
 require('dotenv').config();
@@ -19,14 +21,20 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // Middleware
+
+app.use(helmet());
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const expiryDate = new Date( Date.now() + 60 * 60 * 1000 ); // 1 hour
+
 app.use(session({
   secret            : process.env.SESSION_HASH,
+  name              : 'sessionId',
   resave            : true,
   saveUninitialized : true,
   store             : new MySQLStore({
@@ -36,8 +44,10 @@ app.use(session({
     password        : process.env.LOCAL_PASSWORD,
     database        : process.env.LOCAL_DATABASE
   }),
-  maxAge            : Date.now() + (8 * 3600 * 1000)
-}))
+  cookie            : {
+    expires         : expiryDate
+  }
+}));
 
 // Passport Middleware
 app.use(passport.initialize());
@@ -46,15 +56,12 @@ app.use(passport.session());
 // Flash Messages
 app.use(flash());
 
-
 // Routes
 app.use('/', homeRoutes);
-// app.use('/auth', authRoutes)(app, passport);
 app.use('/auth', authRoutes);
 
 // Load Passport Strategies
-// require('./passport/passport')(passport, models.User);
-
+require('./passport/passport')(passport, models.User);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -71,5 +78,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
