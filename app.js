@@ -1,16 +1,20 @@
-const createError   = require('http-errors')
-  ,   express       = require('express')
-  ,   path          = require('path')
-  ,   cookieParser  = require('cookie-parser')
-  ,   logger        = require('morgan')
-  ,   session       = require('express-session')
-  ,   MySQLStore    = require('express-mysql-session')(session)
-  ,   homeRoutes    = require('./routes/home')
-  ,   authRoutes    = require('./routes/auth')
-  ,   flash         = require('connect-flash')
-  ,   passport      = require('passport')
-  ,   helmet        = require('helmet')
-  ,   models        = require('./models')
+
+const createError       = require('http-errors')
+  ,   express           = require('express')
+  ,   path              = require('path')
+  ,   cookieParser      = require('cookie-parser')
+  ,   logger            = require('morgan')
+  ,   session           = require('express-session')
+  ,   MySQLStore        = require('express-mysql-session')(session)
+  ,   homeRoutes        = require('./routes/home')
+  ,   authRoutes        = require('./routes/auth')
+  ,   flash             = require('connect-flash')
+  ,   passport          = require('passport')
+  ,   helmet            = require('helmet')
+  ,   models            = require('./models')
+  ,   expressValidator  = require('express-validator')
+
+  const {check, validationResult} = require('express-validator/check');
 
   
 require('dotenv').config();
@@ -22,11 +26,13 @@ app.set('view engine', 'pug');
 
 // Middleware
 
-app.use(helmet());
+// app.use(helmet());
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -52,6 +58,9 @@ app.use(session({
 // Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Express Validator
+app.use(expressValidator());
 
 // Flash Messages
 app.use(flash());

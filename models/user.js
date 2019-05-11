@@ -5,15 +5,16 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
 
     firstname   : DataTypes.STRING,
-    lastname    :  DataTypes.STRING,
-    password    : DataTypes.STRING,
+    lastname    : DataTypes.STRING,
     email       : DataTypes.STRING,
+
     fullname    : {
       type      : DataTypes.VIRTUAL,
       get() {
         return this.getDataValue('firstname') + ' ' + this.getDataValue('lastname')
       }
     },
+
     password    : DataTypes.STRING,
     personalId  : DataTypes.STRING,
     perfil      : DataTypes.ENUM(['admin', 'aprobador', 'colaborador']),
@@ -28,4 +29,5 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   return User;
+  
 };

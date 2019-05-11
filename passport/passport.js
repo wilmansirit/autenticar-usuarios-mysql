@@ -22,12 +22,16 @@ module.exports = (passport, user) => {
 				return await bCrypt.hash(password, salt);
 			};
 
+			// If email exist
 			const userExist = await User.findOne({where	: {email: email}});
 			if (userExist) return done(null, false, {message: 'That email is already taken'})
 		
-
+			// If personal Id exist
 			const idExist = await User.findOne({where: {personalId: req.body.personalId}})
 			if (idExist) return done(null, false, {message: 'That Personal ID is already taken'})
+
+			// If password does not match
+			if(req.body.confirmPassword != password) return done(null, false, {message: 'Password does not match'});
 
 			try {
 
@@ -39,12 +43,12 @@ module.exports = (passport, user) => {
 					password	: await generateHash(password)
 				};
 				
-				const newUser = await User.create( data );
+				const newUser = await User.create( data )
 				return done(null, newUser);
 
 			} catch (err) {
 
-				console.error(err);					
+				console.error('***Error:', err, req.flash('SequelizeValidationError'));
 				return done(null, false);
 
 			};

@@ -13,7 +13,10 @@ html
 			.panel.panel-default
 
 				if (message.length > 0)
-					.alert.alert-danger(role='alert')= message
+					.alert.alert-danger(role='alert')
+						ul
+							each error in message
+								li=error.msg
 
 				.panel-heading.text-center Registro de Usuario
 				.panel-body
@@ -26,12 +29,15 @@ html
 							input.form-control(type="text", name="lastname" required placeholder="Pérez González")
 						.form-group
 							label(for="email") Correo Electrónico: 
-							input.form-control(type="email", name="email" required placeholder="joe.doe@acme.com")
+							input.form-control(type="text", name="email" required placeholder="joe.doe@acme.com")
 						.form-group
 							label(for="personalId") Cédula:
-							input.form-control(type="text", name="personalId" pattern="[0-9]{7,8}" required placeholder="23.456.789")
+							input.form-control(type="text", name="personalId" pattern="[0-9]{7,10}" required placeholder="23.456.789")
 						.form-group
 							label(for="password") Contraseña:
-							input.form-control(type="password", name="password" required placeholder="password")
+							input.form-control(type="password", name="password" required placeholder="Password")
+						.form-group
+							label(for="password") Confirmar Contraseña:
+							input.form-control(type="password", name="confirmPassword" required placeholder="Confirm password")
 						
 						button.btn.btn-outline-primary.btn-block(type="submit") SignUp

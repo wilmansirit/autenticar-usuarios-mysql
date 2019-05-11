@@ -7,7 +7,7 @@ module.exports = {
 	signUp		:	(req, res) => {
 
 						const message = req.flash('error');						
-						res.render('auth/signUp', { message	: message })
+						res.render('auth/signUp', { message	: 	message });
 
 					},
 
@@ -33,4 +33,4 @@ module.exports = {
 
 					}
 
-}
+};
