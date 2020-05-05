@@ -8,6 +8,7 @@ module.exports = {
     "password": process.env.LOCAL_PASSWORD,
     "database": process.env.LOCAL_DATABASE,
     "host": '127.0.0.1',
+    "port": process.env.LOCAL_DATABASE_PORT,
     "dialect": 'mysql',
     "pool": {
       "max": 50,
@@ -21,6 +22,7 @@ module.exports = {
     "password": process.env.LOCAL_PASSWORD,
     "database": process.env.LOCAL_DATABASE,
     "host": '127.0.0.1',
+    "port": process.env.LOCAL_DATABASE_PORT,
     "dialect": 'mysql'
   },
   "production": {
@@ -28,6 +30,7 @@ module.exports = {
     "password": process.env.LOCAL_PASSWORD,
     "database": process.env.LOCAL_DATABASE,
     "host": process.env.DB_HOSTNAME,
+    "port": process.env.LOCAL_DATABASE_PORT,
     "dialect": 'mysql',
     "pool": {
       "max": 50,

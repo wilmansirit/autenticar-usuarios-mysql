@@ -8,19 +8,24 @@
 
 <!-- O también junto con el PASSWORD -->
 
-        CREATE USER autenticar_usuarios_mysql@localhost IDENTIFIED BY 'm94xp6zugrrjpc5m$';
+        CREATE USER autenticarPassportMySQL@localhost IDENTIFIED BY 'm94xp6zugrrjpc5m$';
+        CREATE USER autenticarPassportMySQL@localhost IDENTIFIED WITH MYSQL_NATIVE_PASSWORD BY 'm94xp6zugrrjpc5m$';
 
 <!-- 3.- Asignar una clave para el acceso con este usuario: -->
 
-        SET PASSWORD FOR autenticar_usuarios_mysql@localhost = PASSWORD('UnAcl4v3muyDiFiCiL');
+        SET PASSWORD FOR autenticarPassportMySQL@localhost = PASSWORD('UnAcl4v3muyDiFiCiL');
+
+<!-- o cambiar password (Para controladores antes de mysql 8.0)-->
+
+        ALTER USER 'autenticarPassportMySQL'@'localhost' IDENTIFIED WITH MYSQL_NATIVE_PASSWORD BY 'PASSWORD';
 
 <!-- 4.- Asignar los privilegios para el acceso a la base de datos específica: -->
 
-        GRANT ALL ON autenticar_usuarios_mysql.* TO autenticar_usuarios_mysql@localhost WITH GRANT OPTION;
+        GRANT ALL ON autenticarPassportMySQL.* TO autenticarPassportMySQL@localhost WITH GRANT OPTION;
 
 <!-- O a todas las bases de datos: -->
 
-        GRANT ALL ON *.* TO autenticar_usuarios_mysql@localhost;
+        GRANT ALL ON *.* TO autenticarPassportMySQL@localhost;
 
 <!-- 5.- Reiniciar la caché -->
 

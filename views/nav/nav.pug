@@ -1,6 +1,6 @@
 
 nav.navbar.navbar-expand-md.navbar-light(style="background-color: #FFEEEE")
-	a.navbar-brand(href='/') Navbar
+	a.navbar-brand(href='/') API Aseg.
 	button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
 		span.navbar-toggler-icon
 	#navbarSupportedContent.collapse.navbar-collapse
@@ -8,16 +8,22 @@ nav.navbar.navbar-expand-md.navbar-light(style="background-color: #FFEEEE")
 			li.nav-item.active
 				a.nav-link(href='#')
 					span.sr-only (current)
-			li.nav-item
-				a.nav-link(href='/') Home
 			if isAuthenticated
 				li.nav-item
-					a.nav-link(href='/auth/dashboard') Dashboard
+					a.nav-link(href='/dashboard') Dashboard
+				li.nav-item
+					a.nav-link(href='/preventivos') Preventivos
+				li.nav-item
+					a.nav-link(href='#') Correctivos
+				li.nav-item
+					a.nav-link(href='#') KPIs
+				li.nav-item
+					a.nav-link(href='/auth/logout') Salir
 			if !isAuthenticated
+				li.nav-item
+					a.nav-link(href='/') Home
 				li.nav-item
 					a.nav-link(href='/auth/signUp') Registrarse
 				li.nav-item
 					a.nav-link(href='/auth/signIn') Ingresar
-			if isAuthenticated
-				li.nav-item
-					a.nav-link(href='/auth/logout') Salir
+

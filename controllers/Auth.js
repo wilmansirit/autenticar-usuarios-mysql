@@ -4,33 +4,24 @@
 module.exports = {
 
 
-	signUp		:	(req, res) => {
+	signUp: (req, res) => {
 
-						const message = req.flash('error');						
-						res.render('auth/signUp', { message	: 	message });
+		const message = req.flash('error');
+		res.render('auth/signUp', { message: message });
 
-					},
+	},
 
-	signIn		: 	(req, res) => {
+	signIn: (req, res) => {
 
-						const message = req.flash('error');						
-						res.render('auth/signIn', { message	: message });
+		const message = req.flash('error');
+		res.render('auth/signIn', { message: message });
 
-					},
+	},
 
-	logout		:	(req, res) => {
+	logout: (req, res) => {
 
-						req.session.destroy( err => res.redirect('/'))
-						
-					},
+		req.session.destroy(err => res.redirect('/'))
 
-	dashboard	:	(req, res, next) => {
-		
-						res.render('dashboard', {
-							user: req.user,
-							isAuthenticated: req.isAuthenticated()
-						});
-
-					}
+	}
 
 };

@@ -1,17 +1,28 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express')
+  , router = express.Router()
+  , home = require('../controllers/homeController');
+
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  
+
   res.render('index');
 
 });
 
-// router.get('/dashboard', (req, res, next) => {
+/* GET Dashboard */
+router.get('/dashboard', isLoggedIn, home.dashboard);
 
-//   res.render('dashboard', { user: req.user });
+/* GET Preventivos */
+router.get('/preventivos', isLoggedIn, home.preventivos);
 
-// })
+/* Logged-in verify */
+function isLoggedIn(req, res, next) {
+
+  if (req.isAuthenticated()) return next();
+  res.redirect('/auth/signIn');
+
+}
+
 
 module.exports = router;
