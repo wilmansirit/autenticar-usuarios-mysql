@@ -18,6 +18,14 @@ module.exports = {
             isAuthenticated: req.isAuthenticated()
         })
 
+    },
+
+    correctivos: (req, res) => {
+
+        res.render('correctivos', {
+            isAuthenticated: req.isAuthenticated()
+        })
+
     }
 
 };

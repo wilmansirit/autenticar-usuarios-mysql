@@ -1,6 +1,6 @@
 const express = require('express')
   , router = express.Router()
-  , home = require('../controllers/homeController');
+  , home = require('../controllers');
 
 
 /* GET home page. */
@@ -11,10 +11,13 @@ router.get('/', (req, res, next) => {
 });
 
 /* GET Dashboard */
-router.get('/dashboard', isLoggedIn, home.dashboard);
+router.get('/dashboard', isLoggedIn, home.homeController.dashboard);
 
 /* GET Preventivos */
-router.get('/preventivos', isLoggedIn, home.preventivos);
+router.get('/preventivos', isLoggedIn, home.homeController.preventivos);
+
+/* GET Correctivos */
+router.get('/correctivos', isLoggedIn, home.homeController.correctivos);
 
 /* Logged-in verify */
 function isLoggedIn(req, res, next) {
