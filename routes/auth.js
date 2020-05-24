@@ -35,7 +35,7 @@ router.post('/signUp', (req, res) => {
 
 		passport.authenticate('local-signUp', {
 
-			successRedirect: '/auth/dashboard',
+			successRedirect: '/dashboard',
 			failureRedirect: '/auth/signUp',
 			failureFlash: true
 

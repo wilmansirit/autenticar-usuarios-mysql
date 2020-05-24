@@ -26,6 +26,14 @@ module.exports = {
             isAuthenticated: req.isAuthenticated()
         })
 
+    },
+
+    kpis: (req, res) => {
+
+        res.render('kpis', {
+            isAuthenticated: req.isAuthenticated()
+        })
+
     }
 
 };

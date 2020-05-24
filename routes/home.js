@@ -19,6 +19,9 @@ router.get('/preventivos', isLoggedIn, home.homeController.preventivos);
 /* GET Correctivos */
 router.get('/correctivos', isLoggedIn, home.homeController.correctivos);
 
+/* GET Correctivos */
+router.get('/kpis', isLoggedIn, home.homeController.kpis);
+
 /* Logged-in verify */
 function isLoggedIn(req, res, next) {
 
