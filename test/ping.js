@@ -2,11 +2,11 @@ const Sequelize = require('sequelize');
 
 // Option 1: Passing parameters separately
 const sequelize = new Sequelize(
-    'autenticar-usuarios-mysql',          // Database
-    'autenticar-usuarios-mysql',          // User name
-    'JtMUk7XzXNm2OgID',                    // Password
+    'AUTENTICAR_USUARIOS_MYSQL',          // Database
+    'AUTENTICAR_USUARIOS_MYSQL',          // User name
+    'BXLaWEEbR1-@VPzi',                    // Password
     {
-        host: 'localhost',  /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
+        host: '172.18.0.3',  /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
         port: 3306,
         dialect: 'mysql'
     },
